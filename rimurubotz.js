@@ -149,6 +149,19 @@ case 'donasi':
 if (cekUser("id", sender) == null) return Notdaftar()
 sendMedia("image", donasi, "Donasi kak minimal 1k❤")
 break
+case 'daftar': case 'login':
+if (cekUser("id", sender) !== null) return reply("Kamu sudah terdaftar sebelumnya")
+user.push({ id: sender, emote: "❤", timers: moment().format('LLL'), hit: 0, star: 1, afk: false, alasan:false, ban: false, premium: false })
+fs.writeFileSync('./lib/data.json', JSON.stringify(user, null, 2))
+reply(`[ *NEW INFO* ] 
+• *User* : ${sender.split("@")[0]}
+• *Star* : ⭐[1]
+• *Hit* : 0
+• *Premium* : false
+• *Ban* : false
+• *Afk* : false
+~> [🤖] : Selamat @${sender.split("@")[0]} Anda berhasil bergabung ke database bot pada ${moment().format('LLL')}`)
+break
 
 case 'delete':
 if (cekUser("id", sender) == null) return Notdaftar()
